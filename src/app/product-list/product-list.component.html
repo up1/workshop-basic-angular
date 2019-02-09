@@ -1,30 +1,34 @@
 <div class='card'>
   <div class='card-header'>
-    List of Product Page
+    {{pageName}}
   </div>
+
   <div class='card-body'>
     <div class='row'>
       <div class='col-md-2'>Filter by:</div>
       <div class='col-md-4'>
-        <select>
-          <option>Choosing</option>
-          <option>TODO</option>
-          <option>TODO</option>
-        </select>
+        <input type="text"
+               [(ngModel)] = 'filterData'>
       </div>
     </div>
     <div class='row'>
       <div class='col-md-6'>
-        Filtered by ...
+        Filtered by {{filterData}}
       </div>
     </div>
     <div class='table-responsive'>
-      <table class='table'>
+      <table class='table'
+
+             *ngIf="products && products.length"
+
+      >
         <thead>
         <tr>
           <th>
-            <button class='btn btn-primary'>
-              Product Image
+            <button class='btn btn-primary'
+                    (click)="toggleToShowProductImage()"
+            >
+              {{isShowImage ? 'Hide Image' : 'Show Image'}}
             </button>
           </th>
           <th>Product Code</th>
@@ -35,35 +39,19 @@
         </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let product of filteredProducts">
             <th>
-              XXX
+              <img *ngIf="isShowImage"
+                   [src]="product.imageUrl"
+                   [title]="product.name"
+                   [style.width.px]="imageWidth"
+              />
             </th>
-            <th>0001</th>
-            <th>Name 01</th>
-            <th>1000.00</th>
+            <th>{{product.code | replaceWithDash: ' '}}</th>
+            <th>{{product.name | uppercase}}</th>
+            <th>{{product.price | currency: 'THB ' : 'symbol': '1.2'}}</th>
             <th>Yes</th>
-            <th>****</th>
-          </tr>
-          <tr>
-            <th>
-              XXX
-            </th>
-            <th>0002</th>
-            <th>Name 02</th>
-            <th>1000.00</th>
-            <th>Yes</th>
-            <th>****</th>
-          </tr>
-          <tr>
-            <th>
-              XXX
-            </th>
-            <th>0003</th>
-            <th>Name 03</th>
-            <th>1000.00</th>
-            <th>Yes</th>
-            <th>****</th>
+            <th>{{product.rating}}</th>
           </tr>
         </tbody>
       </table>
