@@ -51,7 +51,12 @@
             <th>{{product.name | uppercase}}</th>
             <th>{{product.price | currency: 'THB ' : 'symbol': '1.2'}}</th>
             <th>Yes</th>
-            <th>{{product.rating}}</th>
+            <th>
+              <app-rating
+                [rating]="product.rating"
+                (ratingClicked)="onRatingClicked($event)">
+              </app-rating>
+            </th>
           </tr>
         </tbody>
       </table>
