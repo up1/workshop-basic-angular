@@ -47,7 +47,10 @@
                    [style.width.px]="imageWidth"
               />
             </th>
-            <th>{{product.code | replaceWithDash: ' '}}</th>
+            <th><a
+              [routerLink]="['/product', product.id]">
+              {{product.code | replaceWithDash: ' '}}
+            </a></th>
             <th>{{product.name | uppercase}}</th>
             <th>{{product.price | currency: 'THB ' : 'symbol': '1.2'}}</th>
             <th>Yes</th>
