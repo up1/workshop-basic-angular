@@ -9,6 +9,7 @@ import { ReplaceWithDashPipe } from './replace-space-with-dash.pipe';
 import { RatingComponent } from './rating/rating.component';
 import {RouterModule} from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {ProductDetailGuard} from './product-detail/product-detail.guard';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     FormsModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
-      { path: 'product/:id', component: ProductDetailComponent },
+      { path: 'product/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       { path: '**', redirectTo: 'products', pathMatch: 'full' }
     ]),
